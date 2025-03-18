@@ -1,0 +1,17 @@
+Nikobot was designed by two students Nico Steynberg and Irvin Jurado in 2020 at Waikato University, 
+this project was supervised by three professors Mrs Melanie Ooi, Mr Ye Chow Kuang, and  Mr Nick Pickering.
+In Nov 2025, Xuan Ky another student of Master Electrical and Electronic Engineering Practice who wanted to improve the controller 
+of this robot car from Arduino Mega 2560 to ESP32 with Raspberry PI and applied IoT  MQTT and Image Processing by using Python with Yolo V10 or V11 in this application.
+Although this work is done and has more advantages in the IoT and Image processing technique, however, the control Algorithms such as PID for Motor Speed still
+need to improve to make the speed control smooth. An image dataset for training robots to recognize traffic signs also needs to improve in quality.
+Besides that, this upgrading project is better than the original one when a new  protocol and website for control and monitoring were implemented with very
+clearly, it is easy for users to control and manage robots over the internet.
+Two cameras were installed to monitor the robot during traveling, and GPS was to displace the robot's position over Google Maps. Moreover, many analog sensors were installed to 
+indicate robot data such as distance sensors, current sensors, voltage sensors, and so on...etc.
+Thanks to Waikato University especially Mrs Malenie who gave very good advice for me to start and improve my project while working with this robot car.
+Thanks to Waikato University provided me with a good environment for me to work and improve this project, especially the support from the Lab Technician 
+Mr. Benson gave me many advice and helped me during my time working on this project.
+
+
+Xuan Ky Pham
+Student ID: 1649932
