@@ -1,0 +1,204 @@
+body {
+    background-color: #eee;
+    color: #000;
+    font-family: "DejaVu Sans", Arial, sans-serif;
+    font-size: 10pt;
+    margin: 0;
+    width: 100%;
+}
+
+fieldset {
+    border: 1px solid #777;
+    margin: 0 0 10px 0;
+    padding: 5px 10px;
+}
+
+legend {
+    color: #777;
+    font-size: 11pt;
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+label {
+    color: #777;
+    font-weight: bold;
+}
+
+.viewMessage {
+    background-color: #fff;
+    border: 1px dotted #777;
+    float: right;
+    font-family: "DejaVu Sans Mono", monospace;
+    height: 500px;
+    line-height: 150%;
+    overflow: scroll;
+    padding: 0 5px;
+    resize: vertical;
+    white-space: pre;
+    width: calc(30vw - 30px);
+}
+
+.viewMessage span {
+    font-family: "DejaVu Sans Mono", monospace;
+    white-space: pre !important;
+    word-wrap: normal !important;
+}
+
+.hidden {
+    display: none;
+}
+
+.option_row {
+    margin-bottom: 4px;
+}
+
+#connectionStatus {
+    font-weight: bold;
+}
+
+#content {
+    padding: 10px;
+}
+
+#urlHistory, #favorites, #filterMessage {
+    border: 1px solid #999;
+    padding: 1px 3px;
+    width: 500px;
+}
+
+#serverSchema, #serverPort, #lastMsgsNum {
+    border: 1px solid #999;
+    padding: 1px 3px;
+    width: 50px;
+}
+
+#serverHost {
+    border: 1px solid #999;
+    padding: 1px 3px;
+    width: 200px;
+}
+
+#serverPath, #serverParams {
+    border: 1px solid #999;
+    padding: 1px 3px;
+    width: 300px;
+}
+
+#sendMessage {
+    height: 40px;
+    line-height: 150%;
+    min-width: 300px;
+    padding: 0 3px;
+    width: 600px;
+}
+
+.disabledText {
+    color: #aaa;
+}
+
+#messages {
+    background-color: #fff;
+    border: 1px dotted #777;
+    float: left;
+    height: 500px;
+    line-height: 150%;
+    overflow: scroll;
+    padding: 0 5px;
+    resize: vertical;
+    width: calc(100vw - 54px);
+}
+
+#messages pre {
+    color: #000;
+    font-family: "DejaVu Sans Mono", monospace;
+    margin: 0;
+    min-width: fit-content;
+    width: fit-content;
+}
+
+#messages .sent {
+    color: #f63;
+}
+
+
+
+
+
+/*------------------NAV-----------------------*/
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
