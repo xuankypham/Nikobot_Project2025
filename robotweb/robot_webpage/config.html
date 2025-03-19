@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+
+body {font-family: Arial, Helvetica, sans-serif;}
+ h2{
+      text-align: center;
+      color: white;
+      background-color:turquoise;
+    padding:0px;
+    margin: 0px;
+      
+      }
+    h5{
+      text-align: center;
+      color: white;
+      background-color:turquoise;
+    padding:0px;
+    margin: 0px;
+      }
+.navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+</style>
+</head>
+<body > <!-- onload="getdata_setup()">   -->
+
+
+
+<div class="navbar">
+      <div class="dropdown">
+	
+    <button class="dropbtn"style="font-size:20px"><i class="fa fa-bars"></i> Menu </button>
+    <div class="dropdown-content" >
+      <a class="active" href="/robotweb/index.php"><i class="fa fa-fw fa-home"></i> Home</a> 
+      <a class="fa fa-cog" aria-hidden="true" href="/robotweb/setup.html">  Setup</a>
+      <a class="fa fa-credit-card" aria-hidden="true" href="/robotweb/datamonitor.html">LineChart</a>
+       <a class="fa fa-credit-card" aria-hidden="true" href="/robotweb/wsdata.html"> wsdata</a>
+       <a class="fa fa-credit-card" aria-hidden="true" href="/robotweb/map_control.html"> Mapcontrol</a>
+       <a class="fa fa-credit-card" aria-hidden="true" href="/robotweb/mysqllogenb.php"> mysqllogenb</a>
+       <a class="fa fa-credit-card" aria-hidden="true" href="/robotweb/robotdata.php"> RobotData</a>
+
+     <a class="fa fa-address-book-o" aria-hidden="true" href="/robotweb/about.html"> About</a>
+     <a class="fa fa-address-book-o" aria-hidden="true" href="/robotweb/help.html"> help</a>
+
+    </div>
+</div>
+
+<p style="color:rgb(71, 218, 255)"> <i class="fa fa-fw fa-user"></i> XuanKyAutomation</p>
+</div>
+
+
+<h3 style="text-align:left">CONTROL ROBOT CAR</h3>
+
+<div>
+
+  <p>Websocket Status:  <span id="WSstatus"> Disconnected <span></p> 
+  <label> WS Server address: </label>
+  <input id = "ip" type="text"  placeholder="http://192.168.1.8" readonly> </input>
+  
+</div>
+<br>
+<div>
+ <fieldset style = "width: 330px; background-color: #f5eeee;">
+ <legend>SETUP PARAMETER FIELD</legend>
+   
+
+<form action="/setup_wifi" method="GET">
+   <fieldset>
+   
+   <legend>WIF Setup</legend>
+<table>
+  <tr><td>SSID*</td>    
+  <td><input style="font-size:15px"type="text" name="wifissid" id="wifissid" size="25" maxlength="25" autofocus="autofocus" placeholder= "Wifi ssid"> </td></tr>
+   <tr><td>Password*</td>
+  <td><input style="font-size:15px" type="text" name="wifipass" id="wifipass" size="25" maxlength="25"placeholder= "wifi password"></td></tr>
+  
+  <tr><td>Host Name*</td>
+    <td><input style="font-size:15px" type="text" name="wifihost" id="wifihost" size="25" maxlength="25"placeholder= "wifi host name"></td></tr>
+    <td><hr> </td>    <td><hr> </td>
+
+  
+<tr><td> </td>
+<td><input style="font-size:15px" type="submit" value="Save" disabled>
+</tr></td>
+</table>
+ </fieldset>
+</form>
+<hr>
+<br>
+
+
+  <fieldset>
+  
+  <legend>clear wifi </legend>
+<table>
+ 
+  <tr><td>WifiClearPassword</td>
+ <td><input style="font-size:15px" type="text" size="18" maxlength="30" id = "wificlearPass"></td></tr>
+ 
+  
+<tr><td> </td>
+<td><input style="font-size:15px" type="submit" value="Clear wifi" onclick = "clearwifi()">
+</tr></td>
+</table>
+</fieldset>
+
+<br>
+
+
+
+  <fieldset>
+  
+  <legend>Update Firmware ESP32 </legend>
+<table>
+ 
+  <tr><td>Upload File</td>
+ <td> <a href="/configure" target="_blank" style="background-color: #f7dede;border-radius: 5%;">Update Firmware</a></tr>
+ 
+</table>
+</fieldset>
+
+
+
+
+</fieldset>
+</div>
+    <!-- --------------------------------------------------------->
+<br>
+
+
+<label id ="demo"> Test Data</label>
+<!--------------------------------------------------------------------------->
+
+<footer style="color:blue; text-align:left"> CopyRight Xuan Ky Automation <br>Email: phamxuanky82@gmail.com </footer>
+
+
+<script>
+   window.onload =getdata();
+
+
+//-----------------------WS------------
+
+
+var Socket;
+
+Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+//Socket = new WebSocket('ws://192.168.58.25:81/');
+Socket.onopen = function () {  
+  Socket.send('Connect ' + new Date());
+                          var e = document.getElementById('WSstatus');
+                          e.innerHTML = 'Connected !';
+                          e.style.color = 'blue'         
+};
+
+Socket.onerror = function (error) {
+  console.log('WebSocket Error ', error);
+                          var e = document.getElementById('WSstatus');
+                          e.innerHTML = 'Disconnected !';
+                          e.style.color = 'red'
+};
+
+Socket.onmessage = function(event) { 
+  var full_data = event.data;
+  console.log(full_data);
+  var json = JSON.parse(full_data);
+	document.getElementById("demo").innerHTML = full_data;
+  
+
+ // document.getElementById("topsub").value =json.TopicSub;
+
+ 
+ };
+
+ //----------------------------------------------   
+var myVartime = setInterval(updateTime, 1000); 
+   
+   function updateTime() 
+{  
+   var d = new Date();
+   var t = "";
+   var dayval =d.toLocaleDateString();
+   var date =d.toDateString();
+   t = d.toLocaleTimeString();
+   
+   document.getElementById('dateval').innerHTML = date;
+   document.getElementById('timeval').innerHTML = t;
+}
+
+
+
+//---------------------------------MQTT---------------------------
+function setupwifi() {
+  
+  var r = confirm("Do you want to setup wifi");
+  if(r==true){
+  
+ var ssid =document.getElementById("wifissid").value;
+ var pass =document.getElementById("wifipass").value;
+ 
+  
+  
+ if (ssid!=""&& pass!="") {
+ var Json = {"ssid":ssid, "password1":password1,"host_name":host_name} ;
+ // Ko dung Array dc vi trong data co nhieu kieu du lieu
+ var myJSON = JSON.stringify(Json);
+ 
+// This json data will be send over websocket 
+  Socket.send(myJSON);
+
+  document.getElementById("demo").innerHTML = myJSON;
+   
+  var mqApply =document.getElementById("wifisubmit");
+   mqApply.value="waiting!";
+   mqApply.disabled=true;
+  InputButtWait(mqApply);
+ 
+  }// nothing to send
+ else { alert("Hello! You haven't got input wifi value to setup!!"); }
+ 
+ } // special character
+ } // End of confirm
+ 
+ 
+ //}
+
+
+ function Validate(str) {
+  //Regex for Valid Characters i.e. Alphabets, Numbers and Space.
+  var regex = /^[A-Za-z0-9 ]+$/
+  var isValid = regex.test(str);
+  if (!isValid) {
+      //alert("Contains Special Characters.");
+  } else {
+      //alert("Does not contain Special Characters.");
+  }
+
+  return isValid;
+}
+
+function InputButtWait(v){
+  var myVar = setInterval(function(){ v.disabled=false;
+  v.value="Apply";}, 8000);
+  return v;
+  clearInterval(myVar);
+ }
+
+ function MbButtonHold(v,val){
+  var myVar = setInterval(function(){v.disabled=false;
+  v.innerHTML=val;}, 8000);
+  return v;
+  clearInterval(myVar);
+ }
+
+
+
+
+ function getdata(){
+  // client will send a signal to ask soket server answer the parameter
+  var ask_data = {"wifi_setup_val": "please"} ;
+  // Ko dung Array dc vi trong data co nhieu kieu du lieu
+  var myJSON = JSON.stringify(ask_data);
+  
+  document.getElementById("demo").innerHTML = myJSON;
+  Socket.send(myJSON);
+ }
+
+ function clearwifi() {  
+  var xhttp = new XMLHttpRequest();
+  var r = confirm("Do you want to Clear wifi in ESP32? \n Put correct password to clear wifi please!");
+       if(r==true){
+
+        var clearwifipass = document.getElementById("wificlearPass").value;
+        if (clearwifipass=="123456"){
+        var Sent = "SetRobot?clearwifi=clearwifipass"
+
+      
+        xhttp.open("GET",Sent, true);
+        xhttp.send(); // send string data
+        } else{ alert("Sorry! Wrong Confirmation password!!");}
+
+        }
+  }
+ 
+
+</script>
+
+</body>
+</html>
+
