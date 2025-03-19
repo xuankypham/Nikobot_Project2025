@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+
+body {font-family: Arial, Helvetica, sans-serif;}
+ h2{
+      text-align: center;
+      color: white;
+      background-color:turquoise;
+    padding:0px;
+    margin: 0px;
+      
+      }
+    h5{
+      text-align: center;
+      color: white;
+      background-color:turquoise;
+    padding:0px;
+    margin: 0px;
+      }
+.navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+</style>
+</head>
+<body > <!-- onload="getdata_setup()">   -->
+
+
+
+<div class="navbar">
+      <div class="dropdown">
+	
+    <button class="dropbtn"style="font-size:20px"><i class="fa fa-bars"></i> Menu </button>
+    <div class="dropdown-content" >
+      <a class="active" href="index.html"><i class="fa fa-fw fa-home"></i> Home</a> 
+      <a class="fa fa-cog" aria-hidden="true" href="setup.html">  Setup</a>
+      <a class="fa fa-credit-card" aria-hidden="true" href="datamonitor.html"> data</a>
+       <a class="fa fa-credit-card" aria-hidden="true" href="wsdata.html"> wsdata</a>
+       <a class="fa fa-credit-card" aria-hidden="true" href="map_control.html"> Mapcontrol</a>
+     <a class="fa fa-credit-card" aria-hidden="true" href="mqttdata.html"> mqttdata</a>
+     <a class="fa fa-credit-card" aria-hidden="true" href="camera.html" target=”_blank”> Camera</a>
+        <a class="fa fa-credit-card" aria-hidden="true" href="rplidar.html" target=”_blank”> RPlidar</a>
+        <a class="fa fa-address-book-o" aria-hidden="true" href="autocontrol.html"> Autocontrol</a>
+     <a class="fa fa-address-book-o" aria-hidden="true" href="about.html"> About</a>
+     <a class="fa fa-address-book-o" aria-hidden="true" href="help.html"> help</a>
+    </div>
+</div>
+
+<p style="color:rgb(71, 218, 255)"> <i class="fa fa-fw fa-user"></i> XuanKyAutomation</p>
+</div>
+
+
+<h3 style="text-align:left">CONTROL ROBOT CAR</h3>
+
+
+
+<div>
+
+  <p>Websocket Status:  <span id="WSstatus"> Disconnected </span></p>
+  <label> WS Server address: </label>
+  
+
+    <fieldset style = "width: 330px; background-color: #f5eeee;">
+    <legend>SETUP PARAMETER FIELD</legend>
+  <table> <tr>
+  <td>SocketServer: </td><td><input id= "ip" type="text"  placeholder="192.168.0.101" > </input> </td>
+</tr>
+<tr>
+ <td> PORT:</td> <td><input id = "wsport" type="text"   value="81" placeholder="81"> </input> </td> 
+  <input id="btws" type ="button" onclick="onconnect()" value="SETUP WEBSOCKET">  </input>
+</tr>
+<br> <hr>
+<tr> </tr>
+<tr> <td>MQTT STATUS</td >    <td id = "mqttstatus" >  DISCONNECTED </td></tr>
+
+</table>
+
+</fieldset>
+
+</div>
+
+
+
+
+<div>
+ <fieldset style = "width: 330px; background-color: #f5eeee;">
+ <legend>SETUP PARAMETER FIELD</legend>
+   
+
+<form action="/setup_mqtt" method="GET">
+   <fieldset>
+   
+   <legend>Mqtt Setup</legend>
+<table>
+  <tr><td>MqttBroker*</td>    
+  <td><input style="font-size:15px"type="text" name="mqttbroker" id="mqbroker" size="18" maxlength="20" autofocus="autofocus" placeholder= "Mqtt Broker"> </td></tr>
+
+  <tr><td>Port*</td>
+    <td><input style="font-size:15px; width : 170px;" type="number" name="mqttport" id="mqport"  value="1883"></td></tr>
+
+   <tr><td>ClientID*</td>
+  <td><input style="font-size:15px" type="text" name="mqttclientid" id="mqclient" size="18" maxlength="30"placeholder= "ClientID"></td></tr>
+  <tr><td>UserName*</td>
+  <td><input style="font-size:15px"type="text" name="mqttuser" id="mquser" size="18" maxlength="30"placeholder= "MqttUsername"></td></tr>
+  <tr><td>Password*</td>    
+  <td><input style="font-size:15px"type="password" name="mqttpass" id="mqpass" size="18" maxlength="10" placeholder="Password"></td></tr>
+  <td><hr> </td>
+    <td><hr> </td>
+  <tr><td>TopicPub*</td>    
+  <td><input style="font-size:15px"type="text" name="mqttpub" id="toppub" size="18" maxlength="50"placeholder= "Topic Pub"></td></tr>
+  <tr><td>TopicSub*</td>    
+  <td><input style="font-size:15px"type="text" name="mqttsub" id="topsub" size="18" maxlength="50" placeholder= "Topic Sub"></td></tr>
+    <td><hr> </td>    <td><hr> </td>
+  
+
+<tr><td><label>MQTTEnable</label>  </td> 
+  <td>  
+   <input type="radio" id="mqenb" name="mqttenb" value="Enable">
+  <label for="mqenb">Enable</label><br>
+  <input type="radio" id="mqdis" name="mqttenb" value="Disable">
+  <label for="mqdis">Disable</label><br>
+  </td></tr>
+  
+  
+  <tr><td> </td>
+<td><input style="font-size:15px" type="submit" value="Save" disabled>
+</tr></td>
+</table>
+ </fieldset>
+</form>
+
+<label>Setup Over Websocket</label>
+<button onclick="setupMqtt()">SETUP</button> <br>
+
+<p> reload data from controller</p>
+<button onclick="getdata()"> RefreshMqtt</button>
+</fieldset>
+</div>
+    <!-- --------------------------------------------------------->
+<br>
+
+<textarea id="response" style="width: 100%;"> test </textarea>
+<label id ="demo" hidden> Test Data</label>
+<!--------------------------------------------------------------------------->
+
+<footer style="color:blue; text-align:left"> CopyRight Xuan Ky Automation <br>Email: phamxuanky82@gmail.com </footer>
+
+
+<script>
+
+ //----------------------------------------------   
+var myVartime = setInterval(updateTime, 1000); 
+   
+   function updateTime() 
+{  
+   var d = new Date();
+   var t = "";
+   var dayval =d.toLocaleDateString();
+   var date =d.toDateString();
+   t = d.toLocaleTimeString();
+   
+   document.getElementById('dateval').innerHTML = date;
+   document.getElementById('timeval').innerHTML = t;
+}
+
+
+
+//---------------------------------MQTT---------------------------
+function setupMqtt() {
+  
+  var r = confirm("Do you want to setup Mqtt ?");
+  if(r==true){
+  
+ var broker =document.getElementById("mqbroker").value;
+ var port =document.getElementById("mqport").value;
+
+ var clientId =document.getElementById("mqclient").value;
+ var username =document.getElementById("mquser").value;
+ var password =document.getElementById("mqpass").value;
+ var TopicPub =document.getElementById("toppub").value;
+ var TopicSub =document.getElementById("topsub").value;
+ var mqenble =document.getElementById("mqenb").checked;
+ var MqttEnable;
+ var mqttstatus = document.getElementById('mqttstatus');
+
+
+ if (mqenble == true){
+  MqttEnable = "Enable";
+  } else {MqttEnable = "Disable";}
+ 
+ var isValid1 = Validate(broker);
+ var isValid2 = Validate(clientId);
+ var isValid3 = Validate(TopicPub);
+ var isValid4 = Validate(TopicSub);
+ 
+   //if (!isValid1||!isValid2||!isValid3||!isValid4) {
+ //if (!isValid1) {
+  //     alert("Contains Special Characters.");
+  // } else {
+       //alert("Does not contain Special Characters.");
+  
+  
+ if (broker!=""&& clientId!=""&&TopicPub!=""&&TopicSub!="") {
+ var Json = {"mqttserver":broker, "port": parseInt(port), "clientId":clientId,"username":username,"password":password,"TopicPub":TopicPub,"TopicSub":TopicSub,"MqttEnable":MqttEnable} ;
+ // Ko dung Array dc vi trong data co nhieu kieu du lieu
+ var myJSON = JSON.stringify(Json);
+ 
+// This json data will be send over websocket 
+  Socket.send(myJSON);
+
+  document.getElementById("demo").innerHTML = myJSON;
+   
+  var mqApply =document.getElementById("mqsubmit");
+   mqApply.value="waiting!";
+   mqApply.disabled=true;
+  InputButtWait(mqApply);
+ 
+  }// nothing to send
+ else { alert("Hello! You haven't got input MQTT value to setup!!"); }
+ 
+ } // special character
+ } // End of confirm
+ 
+ 
+ //}
+
+
+ function Validate(str) {
+  //Regex for Valid Characters i.e. Alphabets, Numbers and Space.
+  var regex = /^[A-Za-z0-9 ]+$/
+  var isValid = regex.test(str);
+  if (!isValid) {
+      //alert("Contains Special Characters.");
+  } else {
+      //alert("Does not contain Special Characters.");
+  }
+
+  return isValid;
+}
+
+function InputButtWait(v){
+  var myVar = setInterval(function(){ v.disabled=false;
+  v.value="Apply";}, 8000);
+  return v;
+  clearInterval(myVar);
+ }
+
+ function MbButtonHold(v,val){
+  var myVar = setInterval(function(){v.disabled=false;
+  v.innerHTML=val;}, 8000);
+  return v;
+  clearInterval(myVar);
+ }
+
+ 
+function getdata(){
+  // client will send a signal to ask soket server answer the parameter
+  var ask_data = {"Mqtt_setup_val": "please"} ;
+  // Ko dung Array dc vi trong data co nhieu kieu du lieu
+  var myJSON = JSON.stringify(ask_data);
+  
+  document.getElementById("demo").innerHTML = myJSON;
+  Socket.send(myJSON);
+ }
+
+
+
+</script>
+
+<script>
+var Socket;
+
+
+function onconnect(){
+var server = document.getElementById("ip").value;
+var port = document.getElementById("wsport").value;
+
+if (server!="" &&  port!=""){
+
+//Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+//var Socket = new WebSocket('ws://192.168.0.101:81/');
+Socket = new WebSocket('ws://'+server +':' + port+'/');
+Socket.onopen = function () {  
+Socket.send('Connect ' + new Date());
+                          var e = document.getElementById('WSstatus');
+                          e.innerHTML = 'Connected !';
+                          e.style.color = 'blue'         
+};
+
+Socket.onerror = function (error) {
+  console.log('WebSocket Error ', error);
+                          var e = document.getElementById('WSstatus');
+                          e.innerHTML = 'Disconnected !';
+                          e.style.color = 'red'
+};
+
+Socket.onmessage = function(event) { 
+  var full_data = event.data;
+  //console.log(full_data);
+	document.getElementById("response").value = full_data;
+  document.getElementById("demo").innerHTML = full_data;
+  var json = JSON.parse(document.getElementById("demo").innerHTML);
+    // receive message feedback from WS Server and fill in form of MQTT
+  //  {"Mqtt": [1,2,3,4,5,6,7 ]}
+
+if ('mqttserver' in json) {
+ document.getElementById("mqbroker").value =json.mqttserver; // ["json"]["mqttserver"] the same
+ document.getElementById("mqclient").value =json.clientId;
+ document.getElementById("mquser").value = json.username;
+ document.getElementById("mqpass").value = json.password;
+ document.getElementById("toppub").value =json.TopicPub;
+ document.getElementById("topsub").value =json.TopicSub;
+ document.getElementById("ip").value = json.IP;
+ 
+ if (json.MqttEnable =="Enable"){
+ document.getElementById("mqenb").checked =true;
+ document.getElementById("mqdis").checked =false;
+ 
+ }else {
+    document.getElementById("mqenb").checked =false;
+    document.getElementById("mqdis").checked =true;
+ } 
+
+}
+
+if ('gpslat' in json) {
+  document.getElementById("ip").value =json.IP;
+
+  if (jsonObject.mqttstatus){ mqttstatus.innerHTML = "CONNECTED" ; mqttstatus.style.color ='green';} else{mqttstatus.innerHTML = "DISCONNECTED" ; mqttstatus.style.color ='red';}
+
+}
+
+};
+}
+
+}
+
+
+
+</script>
+
+</body>
+</html>
+

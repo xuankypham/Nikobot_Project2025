@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Cameras Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+        }
+        h2 {
+            color: #333;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .camera {
+            text-align: center;
+            width: 800px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+
+        }
+        img {
+            width: 800px;
+            height: 800px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            background-color: #ddd;
+            padding: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 768px) {
+            .image-container {
+                flex-direction: column;
+                height: auto;
+                align-items: center;
+            }
+            .camera {
+                width: 100%;
+                height: auto;
+            }
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+
+
+/* -------------------NAVIGATION BAR------------ */
+ body {font-family: Arial, Helvetica, sans-serif;}
+
+.navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 90%;
+            height: 70%;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .table_set {
+            text-align: center;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+
+        }
+
+
+
+        #eventcamera {
+  width: 70%;
+  height: 150px;
+  background-color: lightblue;
+
+}
+table, td{
+    text-align: left;
+
+}
+
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+      <div class="dropdown">
+
+    <button class="dropbtn"style="font-size:20px"><i class="fa fa-bars"></i> Menu </button>
+    <div class="dropdown-content" >
+      <a class="active" href="index.html"><i class="fa fa-fw fa-home"></i> Home</a>
+      <a class="fa fa-cog" aria-hidden="true" href="setup.html">  Setup</a>
+      <a class="fa fa-credit-card" aria-hidden="true" href="datamonitor.html"> data</a>
+       <a class="fa fa-credit-card" aria-hidden="true" href="wsdata.html"> wsdata</a>
+       <a class="fa fa-credit-card" aria-hidden="true" href="map_control.html"> Mapcontrol</a>
+     <a class="fa fa-credit-card" aria-hidden="true" href="mqttdata.html"> mqttdata</a>
+     <a class="fa fa-credit-card" aria-hidden="true" href="camera.html" target=”_blank”> Camera</a>
+        <a class="fa fa-credit-card" aria-hidden="true" href="rplidar.html" target=”_blank”> RPlidar</a>
+
+        <a class="fa fa-address-book-o" aria-hidden="true" href="autocontrol.html"> Autocontrol</a>
+
+     <a class="fa fa-address-book-o" aria-hidden="true" href="about.html"> About</a>
+     <a class="fa fa-address-book-o" aria-hidden="true" href="help.html"> help</a>
+
+	  </div>
+</div>
+    <p style="color:rgb(71, 243, 255) ; margin-top: 20px;font-size: 20px;"> <i class="fa fa-fw fa-user"></i> XuankyAutomation| <span id="wifilogo"> <i class="fa fa-wifi" style="color: lime" aria-hidden="true"></i> </span>   <span id="wifirssi"> 0 </span>%</p>
+</div>
+
+<!-----------------MAIN PROGRAM-------------------->
+
+
+ <h2>RPLIDAR Display</h2>
+    <div class="image-container">
+        <div class="camera">
+            <h3>RPLidar Display</h3>
+            <img id="rplidar_dist" src="placeholder1.jpg" alt="RPlidar Feed">
+            
+        </div>
+
+
+
+
+    </div>
+    
+    <div >
+      <button onclick="startLidar()">Start RPLidar</button>
+      <button onclick="stopLidar()">Stop RPLidar</button>
+      <i> Resolution</i><input type="range" min="10" max="50" value="20" class="slider" id="zoomSlider" onchange="zoomchange()">
+<p>Value:  10 to 50 : <span id="zoomset"> 20 </span></p>
+  </div>
+
+
+<div id = "eventrplidar" style="text-align: center; display: block; ">
+<table style="text-align: left; width:100% ; padding:20px ; margin: 30px;">
+<tr> <td style="width: 10%;">  RPlidar Event </td>     <td > <textarea style ="width: 100%; height:60px" id = "rplidar_event">    </textarea></td></tr>
+<tr> <td style="width: 10%;">  MQTT Event </td>     <td > <textarea style ="width: 100%; height:80px" id = "mqtt_event">    </textarea></td></tr>
+</table>
+
+
+</div>
+
+
+
+
+<hr>
+<table class="image-container1"  >
+  <tr> <td>
+    <div class="camera3" style="text-align: left; float:left">
+<h4> Setup MQTT</h4>
+    <table>
+    <tr>
+       <td> Broker :</td>  <td> <input type="text" id ="broker" value="broker.emqx.io"></td>  </tr>
+        <td> Port :</td>  <td> <input type="text" id="port" value="1883"></td>  </tr>
+        <td> UserName :</td>  <td> <input type="text" id = "username" value="robot"></td>  </tr>
+        <td> Password :</td>  <td> <input type="text" id = "password" value="123456"></td>  </tr>
+        <tr><td ><button onclick="setmqtt()">SETMQTT</button></td><td ><button onclick="stopmqtt()">StopMqtt</button></td></tr>
+
+    </table>
+        </div>
+
+        <div  class="camera1" style="text-align: left; float:left">
+<h4> Setup RPlidar Connection</h4>
+    <table>
+    <tr>
+       <td colspan="2"> Set Communication RPlidar</td>    </tr>
+        <td> Comport :</td>  <td>
+                  <select name="port" id="Comport" style="width:100px">
+
+
+                  </select>
+                    </td>  </tr>
+
+        <td> Boudrate :</td>  <td>  <select name="port" id="boudrate" style="width:100px">
+                    <option> 460800</option>
+                    <option> 115200</option>
+
+                  </select></td>  </tr>
+        <td> TypeDisplay :</td>  <td> <select name="port" id="type_dis" style="width:100px">
+                    <option> Dot</option>
+                    <option> Line</option>
+
+                  </select></td></td>  </tr>
+                <tr> <td colspan="2" ><button onclick="setLidar()">Set RPLidar</button></td></tr>
+
+
+
+
+
+    </table>
+        </div>
+      </td>
+
+      <td>
+
+    <div  class="camera2" style="text-align: left">
+<h4> Setup RPlidar SAFETY</h4>
+    <table>
+    <tr>
+       <td colspan="2"> Set Minimum Safety distance Alarm and Trip</td>    </tr>
+        <td> Alarm (m) :</td>  <td> <input type="text" id="alarm_dist" value ='3'></td>  </tr>
+        <td> Stop (m) :</td>  <td> <input type="text" id = "stop_dist" value="1"></td>  </tr>
+
+
+        <tr> <td> <input type="checkbox" class="checkbox-item" id="lida_safety_enb"> Enable</td><td ><button onclick="setLidarSafe()">Set Lidar Safety</button></td></tr>
+    </table>
+        </div>
+
+
+
+  </div>
+  <br>
+
+
+</td></tr>
+
+<div>
+
+<button onclick="savesetting()">  SAVE SETTING DATA</button>
+    <button onclick="readsetting()">  READ SETTING DATA</button>
+    <label>HOST IP ADDRESS</label> <input type="text" id="ip" placeholder="192.168.0.100:8000" style="color:blue">
+    <button onclick="listcomport()"> List Comport</button>
+
+<h4> OPERATION EVENT DISPLAY</h4>
+    <textarea id =  "event" style="width :100%; height:200px" >
+
+    </textarea>
+
+
+    </div>
+
+
+
+
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.0/socket.io.min.js"></script>
+   <!--<script type = "text/javascript" src="{{ url_for('static', filename='js/socket48.io.min.js') }}"></script>  -->
+
+    <script type="text/javascript">
+
+        // -----------Global Variable---------------------------------------------------------
+        var data_event =document.getElementById('event');
+            const broker = document.getElementById('broker');
+            const port = document.getElementById('port');
+            const user = document.getElementById('username');
+            const pass = document.getElementById('password');
+
+            var alarm_dist = document.getElementById('alarm_dist');
+            var stop_dist= document.getElementById('stop_dist');
+            var lida_safety_enb = document.getElementById('lida_safety_enb');
+
+            var comport = document.getElementById("Comport");
+            var boudrate =document.getElementById("boudrate");
+            var typedis =document.getElementById("type_dis");
+
+
+
+
+
+     var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+     //----------------------------------------------------------------------------
+     function get_currentdatetime(){
+     var currentdate = new Date();
+
+        var datetime = currentdate.getDate() + "/"+(currentdate.getMonth()+1)
+        + "/" + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+        return datetime
+
+     }
+
+     socket.on('connect' ,function()
+     {
+     	socket.emit('check' ,{data: 'User Connected'})
+     });
+     socket.on('lidar_image', function(msg)
+     {
+        //console.log(image)
+        const image_element=document.getElementById('camera1');
+        image_element.src="data:image/jpeg;base64,"+msg;
+     });
+
+
+
+//----------------------------MQTT---------
+        function setmqtt() {
+          data = { broker: broker.value, port: parseInt(port.value) ,user:user.value, pass:pass.value};
+
+            socket.emit('setup_mqtt',data );
+
+            var dt = get_currentdatetime();
+            var msg_string = JSON.stringify(data) +"\n"; //String
+
+            data_event.append(dt + ": " + "Setup MQTT Broker  Data: " + msg_string +"\n");
+        }
+
+
+
+        //------------------------------------------------
+        function savesetting(){
+        socket.emit('write_setting_lidar');
+        }
+         function readsetting(){
+        socket.emit('read_setting_lidar');
+        }
+
+readsetting();
+        function startLidar(){
+          socket.emit('start_lidar');
+
+
+
+        }
+        function stopLidar(){
+          socket.emit('stop_lidar');
+          var dt = get_currentdatetime();
+
+          data_event.append(dt + ": " + "Start RPlidar" +"\n");
+
+        }
+        function stopmqtt(){
+          socket.emit('stop_mqtt');
+          var dt = get_currentdatetime();
+          data_event.append(dt + ": " + "Stop RPlidar" +"\n");
+
+        }
+        
+
+
+     socket.on('datasetup_lidar', function(msg)
+     {
+        //Msg is Json Object
+        dt = get_currentdatetime();
+
+        var msg_string
+        if ('mqtt' in msg){
+            msg_string = JSON.stringify(msg) +"\n"; //String
+            data_event.append(dt + ": " + "Mqtt: " + msg_string +"\n");
+
+            //{'mqtt': {'broker': 'broker.emqx.io', 'port': '1883', 'user': 'robot', 'pass': '123456'}, 'RplidarSet': {'comport': 'COM7', 'boudrate': 115200, 'type_dis': 'Dot'}, 'RPlidar_safety': {'alarm_dist': 3, 'stop_dist': 1, 'enb_safety': True}, 'host': {'hostname': 'Admin', 'ip': '192.168.88.3', 'port': 5000}}
+            broker.value = msg['mqtt']['broker'];
+            port.value = msg['mqtt']['port'];
+            user.value = msg['mqtt']['user'];
+            pass.value = msg['mqtt']['pass'];
+
+
+            alarm_dist.value = msg['RPlidar_safety']['alarm_dist'];
+            stop_dist.value = msg['RPlidar_safety']['stop_dist'];
+
+            var enb =msg['RPlidar_safety']['enb_safety'];
+            if (enb){
+              lida_safety_enb.checked = true;
+            }else{lida_safety_enb.checked = false; }
+
+
+
+
+
+
+
+            }
+            
+            
+        else if ('comport' in msg  ){
+          var dt = new Date();
+            for (i=0 ;i< msg.comport.length ;i++){
+                //Add_comport(Comport, msg.comport[i])
+                data_event.append(dt + ": " + "Comport: " + msg.comport[i] +"\n");
+
+
+                }
+
+
+            msg_string = JSON.stringify(msg) +"\n"; //String
+
+            data_event.append(dt + ": " + "msg: " + msg.comport[i] +"\n");
+
+
+          
+        }
+
+          
+          
+        else{  
+          msg_string =msg
+            }
+
+
+          data_event.append()
+    
+
+        //{"mqtt":{"broker":"broker.emqx.io","port":"1883","user":"robot","pass":"123456"},"intelCam":{"cam_intel_enb":true,"classes":[0]},
+        // "logitectCam":{"cam2_video_link":"Traffic1.mp4","cam2_model_link":"yolo11n.pt","cam2_ctrl_enb":true},"host":{"hostname":"Admin","ip":"192.168.88.4","port":8000}}
+
+
+
+
+     });
+
+
+
+
+
+
+
+
+
+
+
+     socket.on('host_ip', function(msg)
+     {
+        //Msg is Json Object
+
+        document.getElementById('ip').value = "http://" + msg.ip + ":"+ msg.port;
+
+        var msg_string = JSON.stringify(msg) +"\n"; //String
+
+
+        data.append(msg_string)
+     });
+
+
+
+        socket.emit('getdata_web');
+
+
+      function listcomport(){
+         socket.emit('listcomport');
+
+        }
+
+
+
+//---------------------------------------------
+     socket.on('rplidar_image', function(msg)
+     {
+        //console.log(image)
+        const image_element=document.getElementById('rplidar_dist');
+        image_element.src="data:image/jpeg;base64,"+msg;
+     });
+
+
+
+     socket.on('control_event', function(msg)
+     {
+        //Msg is Json Object
+        var msg_string
+        var dt = get_currentdatetime();
+
+        msg_string = JSON.stringify(msg) +"\n"; //String
+
+        data_event.append(dt + ": " + "Operate Robot: " + msg_string +"\n");
+
+
+
+     });
+
+
+
+
+//-------------------------------------
+
+
+    function setLidarSafe(){
+            //Msg is Json Object
+        var msg_string;
+        var dt = get_currentdatetime();
+        var enb_safety = false;
+
+        if (document.getElementById("lida_safety_enb").checked){ enb_safety=true;} else{ enb_safety=false;}
+
+        var data = {"alarm_dist" : parseFloat(alarm_dist.value), "stop_dist":  parseFloat(stop_dist.value),  "enb_safety": enb_safety }
+        //var data ={"Data":"test"};
+        socket.emit("setlidarsafe", data);
+
+        msg_string = JSON.stringify(data) +"\n"; //String
+        data_event.append(dt + ": " + "Set Lidar safety distance for Robot: " + msg_string +"\n");
+
+
+
+    }
+
+   
+
+
+    function setLidar(){
+ 
+
+      var portcom = comport.options[comport.selectedIndex].text;
+      var boud = boudrate.options[boudrate.selectedIndex].text;
+      var val_dis = type_dis.options[type_dis.selectedIndex].text;
+
+
+
+      var data = {"comport":portcom,"boudrate":parseInt(boud), "type_dis" :val_dis}
+
+
+      var dt = get_currentdatetime();
+      var msg_string;
+      socket.emit("set_rplidar", data);
+
+      msg_string = JSON.stringify(data) +"\n"; //String
+      data_event.append(dt + ": " + "Set Lidar Connection for Robot: " + msg_string +"\n");
+    }
+
+
+
+ socket.on('host_ip', function(msg)
+     {
+        //Msg is Json Object
+
+        document.getElementById('ip').value = "http://" + msg.ip + ":"+ msg.port;
+
+        var msg_string = JSON.stringify(msg) +"\n"; //String
+
+        data_event.append(dt + ": " + " HOST IP ADDRESS and Port: " + msg_string +"\n");
+     });
+
+
+var index_msg = 0;
+    //---------------------------------------------
+socket.on('rplidar_event', function(msg)
+     {
+        //console.log(msg)
+        const event = document.getElementById('rplidar_event');
+
+        var dt = new Date();
+
+        if (index_msg<20){
+            event.append (dt + ": " + msg);
+            index_msg = index_msg+1;
+            }else{index_msg =0;  event.textContent="";}
+
+
+     });
+
+
+var index_msg_mqtt= 0
+socket.on('mqtt_lidar_event', function(msg)
+     {
+        //console.log(msg)
+        const event = document.getElementById('mqtt_event');
+
+        var dt = new Date();
+              msg_string = JSON.stringify(msg) +"\n"; //String
+
+
+        if (index_msg_mqtt<3){
+            event.append (dt + ": " + msg_string);
+            index_msg_mqtt = index_msg_mqtt+1;
+            }else{index_msg_mqtt =0;  event.textContent="";}
+
+
+     });
+
+function zoomchange(){
+  var zoomval = parseInt(document.getElementById("zoomSlider").value);
+  document.getElementById("zoomset").innerHTML = document.getElementById("zoomSlider").value;
+
+  data = {"zoomval": zoomval};
+  socket.emit("zoomval" , data);
+}
+
+ </script>
+
+
+<script>
+
+  function Add_comport(id, val) {
+
+    for (i=0 ;i<val;i++){
+      var x = document.getElementById(id);
+      var option = document.createElement("option");
+        option.text = "COM"+String(i);
+        x.add(option);
+    }
+
+}
+
+val = 20
+id= "Comport";
+Add_comport(id, val);
+</script>>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"mqtt": {"broker": "192.168.0.110", "port": 1883, "user": "robot", "pass": "123456"}, "RplidarSet": {"comport": "COM17", "boudrate": 460800, "type_dis": "Dot"}, "RPlidar_safety": {"alarm_dist": 3, "stop_dist": 0.5, "enb_safety": false}, "host": {"hostname": "Admin", "ip": "192.168.0.101", "port": 5000}}

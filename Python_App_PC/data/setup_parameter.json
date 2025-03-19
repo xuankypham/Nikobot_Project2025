@@ -1,0 +1,1 @@
+{"mqtt": {"broker": "192.168.0.110", "port": 1883, "user": "robot", "pass": "123456"}, "intelCam": {"cam_intel_enb": true, "classes": [0, 1, 2], "alarm_dist": 3, "stop_dist": 1, "enb_safety_cam1": true}, "logitectCam": {"cam2_video_link": 3, "cam2_model_link": "yolo11n.pt", "cam2_ctrl_enb": true}, "host": {"hostname": "Admin", "ip": "192.168.0.101", "port": 8000}}
