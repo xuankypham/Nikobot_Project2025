@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Robot Car control</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+
+body {font-family: Arial, Helvetica, sans-serif;}
+ h2{
+      text-align: center;
+      color: white;
+      background-color:turquoise;
+    padding:0px;
+    margin: 0px;
+      
+      }
+    h5{
+      text-align: center;
+      color: white;
+      background-color:turquoise;
+    padding:0px;
+    margin: 0px;
+      }
+.navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #837d7d;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  
+}
+
+</style>
+</head>
+<body> <!-- onload="getdata_setup()">   -->
+
+
+
+<div class="navbar">
+      <div class="dropdown">
+	
+    <button class="dropbtn"style="font-size:20px"><i class="fa fa-bars"></i> Menu </button>
+    <div class="dropdown-content" >
+     <a class="active" href="/"><i class="fa fa-fw fa-home"></i> Home</a> 
+	 <a href="/config"><i class="fa fa-fw fa-user"></i> Config</a>
+      <a class="fa fa-cog" aria-hidden="true" href="/setup">  Setup</a>
+      <a class="fa fa-credit-card" aria-hidden="true" href="/fs_read"> SFLash</a>
+      <a class="fa fa-credit-card" aria-hidden="true" href="/wsdata"> wsdata</a>
+      <a class="fa fa-address-book-o" aria-hidden="true" href="/about"> About</a>
+    </div>
+</div>
+
+<p  style ="color: rgb(0, 255, 213);"> <i class="fa fa-fw fa-user" style ="color: aqua;"></i> XuanKyAutomation</p>
+</div>
+
+<br>
+
+<h4>
+  CONTROL ROBOT CAR OVER WEBSERVER WITH ESP32</h4>
+ <p> 
+  - Support configuration of MQTT Publish client.<br>
+  - Communication type : AJAX.<br>
+  - 1.  MQTT.<br>
+  - 2.  AJAX.<br>
+  - 3. WEBSOCKET.<br>
+  - 4. LORA SERIAL <br>
+  - 5. MODBUS TCPIP <br>
+  ESP is Webserver, Websocket Server, MQTT Client,   
+  Host Name: http://esp_robotcar.local  ;  for setup, press reset or Press Recofigure Wifi , then login ESP_rotbot car Wifi access point.
+  Then configuration wifi or update firmware
+  <br>
+  Program is developed by Pham Xuan Ky (Xuankyautomation)<br>
+  Date: 24/11/2024<br>
+  Contact: Phamxuanky82@gmail.com<br>
+  Tel:+64225179272<br>
+
+
+</p>
+
+<hr> </hr>
+<footer style ="text-align : center; color: blue"> CopyRight:phamxuanky82@gmail.com; <br>Zalo: 0985510900 ;Date:24/11/2024 </footer>
+
+
+</body>
+</html>
