@@ -460,6 +460,8 @@ input {
 
 <div id="status">Connection Status: Not Connected</div> <br>
 <button  onclick="display_mqtt()" style="width :200px ; background-color: gray; height: 50;"> ShowOrHideMQTT_SET</button>
+<button style="width :200px ; background-color: gray; height: 50;" onclick="connectinternet()"> Connect_Internet_Broker</button> <button    onclick="connectlocal()"style="width :200px ; background-color: gray; height: 50;"> Connect_Local_Broker</button>
+
 <br><br>
 
 
@@ -476,10 +478,10 @@ input {
   <legend>Mqtt Setup</legend>
 <table>
  <tr><td>MqttBroker*</td>
- <td style="width: 400px" ><input style="font-size:15px; width: 200px;"type="text" name="server"  size="30" maxlength="30" autofocus="autofocus" placeholder= "Mqtt Broker" value="broker.emqx.io" > </td></tr>
+ <td style="width: 400px" ><input id ="mqttbroker" style="font-size:15px; width: 200px;"type="text" name="server"  size="30" maxlength="30" autofocus="autofocus" placeholder= "Mqtt Broker" value="broker.emqx.io" > </td></tr>
 
  <tr><td>Port*</td>
-   <td><input style="font-size:15px; width : 200px;" type="number" name="port"   value="8083"></td></tr>
+   <td><input id ="mqttport" style="font-size:15px; width : 200px;" type="number" name="port"   value="8083"></td></tr>
 
    <tr><td>Clean Session*</td>
     <td><input style="font-size:15px; width : 200px;" type="checkbox" name="clean_sessions"  value="true" checked></td></tr>
@@ -508,7 +510,7 @@ input {
 <legend>TOPIC Sub Setup</legend>
 <table>
 <tr><td>Subscribe Topic*</td>
-<td><input style="font-size:15px;width: 200px;"type="text" name="Stopic" value = "robotcar/feedback"  size="18" maxlength="20" autofocus="autofocus" > </td></tr>
+<td><input id="subtopic"  style="font-size:15px;width: 200px;"type="text" name="Stopic" value = "robotcar/feedback"  size="18" maxlength="20" autofocus="autofocus" > </td></tr>
 
 <tr><td>Subscribe QOS*</td>
  <td><input style="font-size:15px; width : 200px;" type="text" name="sqos" value="0"></td></tr>
@@ -1001,19 +1003,17 @@ function ToggleVisibility(divClass)
 
 
 
-    // Auto Subscribe, Auto Click Button Subscribe
-    const button = document.getElementById('autoclick_button');
-    function autoClick() {
+       // Auto Subscribe, Auto Click Button Subscribe
+       const button = document.getElementById('autoclick_button');
+    
+    const myTimeout = setInterval(autoClick, 2000);
 
-
+    function autoClick(myTimeout) {
+    
       button.click(); // Triggers the button's click event
-
     clearTimeout(myTimeout);
-
+     
     }
-
-
-    const myTimeout = setTimeout(autoClick, 2000);
 
 
   //---------------MQTT------------------------
@@ -1250,6 +1250,33 @@ function ToggleVisibility(divClass)
             }
 
 
+            function connectinternet(){
+      document.getElementById('mqttbroker').value="broker.emqx.io";
+      document.getElementById('mqttport').value="8083";
+      document.getElementById('subtopic').value="robotcar/feedback";
+      var subtopic_auto = "robotcar/feedbackauto";
+      MQTTconnect();
+
+      const myTimeout1 = setTimeout(autoClick(myTimeout1), 2000);
+
+
+
+
+
+    }
+
+   function connectlocal(){
+
+      document.getElementById('mqttbroker').value="192.168.0.110";
+      document.getElementById('mqttport').value="9001";
+      document.getElementById('subtopic').value="robotcar/feedback";
+      var subtopic_auto = "robotcar/feedbackauto";
+
+      MQTTconnect();
+
+      const myTimeout2 = setTimeout(autoClick(myTimeout2), 2000);
+
+    }
 
 
 
